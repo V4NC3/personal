@@ -1,0 +1,14 @@
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/bin/Debug/netcoreapp2.1/server.deps.json
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/bin/Debug/netcoreapp2.1/server.runtimeconfig.json
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/bin/Debug/netcoreapp2.1/server.runtimeconfig.dev.json
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/bin/Debug/netcoreapp2.1/server.dll
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/bin/Debug/netcoreapp2.1/server.pdb
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.csprojAssemblyReference.cache
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.csproj.CoreCompileInputs.cache
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.RazorAssemblyInfo.cache
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.RazorAssemblyInfo.cs
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.AssemblyInfoInputs.cache
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.AssemblyInfo.cs
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.RazorTargetAssemblyInfo.cache
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.dll
+/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/Debug/netcoreapp2.1/server.pdb
