@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using server.Persistence;
+using server.Providers;
 
 namespace server
 {
@@ -30,6 +31,7 @@ namespace server
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //register DI here
+            services.AddTransient<IUserProvider, UserProvider>();
             
             //connecting to the DB
             services.AddDbContext<AppDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
