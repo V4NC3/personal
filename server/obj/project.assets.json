@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "CryptoHelper/3.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "2.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/CryptoHelper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/CryptoHelper.dll": {}
+        }
+      },
       "Dapper/1.50.5": {
         "type": "package",
         "dependencies": {
@@ -4401,6 +4413,17 @@
     }
   },
   "libraries": {
+    "CryptoHelper/3.0.2": {
+      "sha512": "6xFZdEnhuOmX58TgZAeb20MbddsL8/nR/4CnWhmjMXv9gfpOxD+1bBU7IDtYq2Q8rZJUT6xYWdhW16bKriU2Mw==",
+      "type": "package",
+      "path": "cryptohelper/3.0.2",
+      "files": [
+        "cryptohelper.3.0.2.nupkg.sha512",
+        "cryptohelper.nuspec",
+        "lib/netstandard2.0/CryptoHelper.dll",
+        "lib/netstandard2.0/CryptoHelper.xml"
+      ]
+    },
     "Dapper/1.50.5": {
       "sha512": "1vPpX7WQmQCIb7rwlGOUoVs/yWZhVKvdhuG7WrJV+V+qsP8btnrrCqVWHENAlJxBAnUw5rhWfmuba9/Egei9MA==",
       "type": "package",
@@ -11678,6 +11701,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "CryptoHelper >= 3.0.2",
       "Dapper >= 1.50.5",
       "Microsoft.AspNetCore.App >= 2.1.0",
       "Microsoft.EntityFrameworkCore >= 2.1.0",
@@ -11686,23 +11710,23 @@
     ]
   },
   "packageFolders": {
-    "/Users/v4nc3_mb/.nuget/packages/": {},
+    "/Users/gilbertwong/.nuget/packages/": {},
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/server.csproj",
+      "projectUniqueName": "/Users/gilbertwong/Desktop/Projects/personal/server/server.csproj",
       "projectName": "server",
-      "projectPath": "/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/server.csproj",
-      "packagesPath": "/Users/v4nc3_mb/.nuget/packages/",
-      "outputPath": "/Users/v4nc3_mb/Desktop/Projects/Personal_CRUD/server/obj/",
+      "projectPath": "/Users/gilbertwong/Desktop/Projects/personal/server/server.csproj",
+      "packagesPath": "/Users/gilbertwong/.nuget/packages/",
+      "outputPath": "/Users/gilbertwong/Desktop/Projects/personal/server/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/v4nc3_mb/.nuget/NuGet/NuGet.Config"
+        "/Users/gilbertwong/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -11724,6 +11748,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "CryptoHelper": {
+            "target": "Package",
+            "version": "[3.0.2, )"
+          },
           "Dapper": {
             "target": "Package",
             "version": "[1.50.5, )"
