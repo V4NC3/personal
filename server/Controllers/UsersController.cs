@@ -16,7 +16,7 @@ namespace server.Controllers
         public UsersController (IUserProvider userProvider) {
             this.userProvider = userProvider;
         }
-        public async Task<ActionResult<IEnumerable<UserDataModel>> > GetAllUsers () {
+        public async Task<ActionResult<IEnumerable<UserDataModel>>> GetAllUsers () {
             var data = await this.userProvider.GetAllUsers ();
             return data.ToList ();
         }
