@@ -1,2 +1,4 @@
 server/appsettings.json
 .vscode
+server/obj
+server/bin

@@ -6,22 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using server.Models.DataModels;
 using server.Providers;
 
-namespace server.Controllers
+namespace server.Controllers 
 {
-    [Route("api/user")]
+    [Route ("api/user")]
     [ApiController]
-    public class UsersController : Controller
-    {
+    public class UsersController : Controller {
         private readonly IUserProvider userProvider;
 
-        public UsersController(IUserProvider userProvider)
-        {
+        public UsersController (IUserProvider userProvider) {
             this.userProvider = userProvider;
         }
-        public async Task<ActionResult<IEnumerable<UserDataModel>>> GetAllUsers()
-        {
-            var data = await this.userProvider.GetAllUsers();
-            return data.ToList();
+        public async Task<ActionResult<IEnumerable<UserDataModel>> > GetAllUsers () {
+            var data = await this.userProvider.GetAllUsers ();
+            return data.ToList ();
         }
     }
 }
