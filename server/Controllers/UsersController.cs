@@ -1,24 +1,63 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using server.Managers;
 using server.Models.DataModels;
 using server.Providers;
+using server.Services;
 
-namespace server.Controllers 
-{
+namespace server.Controllers {
     [Route ("api/user")]
     [ApiController]
     public class UsersController : Controller {
+
+        //Providers
         private readonly IUserProvider userProvider;
 
-        public UsersController (IUserProvider userProvider) {
+        //Managers
+        private readonly IUserManager userManager;
+
+        //Services
+        private readonly IPasswordService passwordService;
+
+        public UsersController (
+                IUserProvider userProvider,
+                IPasswordService passwordService,
+                IUserManager userManager
+            ) 
+        {
             this.userProvider = userProvider;
+            this.passwordService = passwordService;
+            this.userManager = userManager;
         }
-        public async Task<ActionResult<IEnumerable<UserDataModel>>> GetAllUsers () {
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers() 
+        {
             var data = await this.userProvider.GetAllUsers ();
-            return data.ToList ();
+            return Ok(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewUser(UserDataModel model) 
+        {
+            if (!ModelState.IsValid) {
+                return BadRequest(ModelState);
+            }
+
+            try 
+            {
+                model.Password = this.passwordService.HashPassword(model.Password);
+                await this.userManager.AddNewUser(model);
+                return Ok();
+            }
+            catch(Exception err)
+            {
+                return BadRequest(err.Message);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 server/appsettings.json
 .vscode
-server/obj
-server/bin
+server/obj/*
+server/bin/*
+server/obj/Debug/netcoreapp2.1/server.csproj.CoreCompileInputs.cache

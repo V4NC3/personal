@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using server.Managers;
 using server.Providers;
 using server.Services;
 
@@ -30,9 +31,15 @@ namespace server
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            //register DI here
+            //Providers
             services.AddTransient<IUserProvider, UserProvider>();
+            services.AddTransient<IFeedProvider, FeedProvider>();
+
+            //Services
             services.AddTransient<IPasswordService, PasswordService>();
+            
+            //Managers
+            services.AddTransient<IUserManager, UserManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
