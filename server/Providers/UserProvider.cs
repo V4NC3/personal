@@ -6,6 +6,7 @@ using System.Data;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using server.Models.DataModels;
+using System;
 
 namespace server.Providers
 {   
@@ -24,6 +25,18 @@ namespace server.Providers
             {
                 await connection.OpenAsync();
                 return connection.Query<UserDataModel>("GetAllUsers", commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task<string> GetUserHashedPassword(string email)
+        {
+            using(var connection = new MySqlConnection(this.configuration.GetConnectionString("Default")))
+            {
+                await connection.OpenAsync();
+                var parameters = new DynamicParameters();
+                parameters.Add("EmailParam", email, DbType.String);
+                var password = connection.QueryFirstOrDefault<string>("GetUserHashedPassword", parameters, commandType: CommandType.StoredProcedure);
+                return password ?? String.Empty;
             }
         }
     }

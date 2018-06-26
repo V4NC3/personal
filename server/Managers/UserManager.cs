@@ -28,7 +28,7 @@ namespace server.Managers
                     parameters.Add("FirstNameParam", model.FirstName, DbType.String);
                     parameters.Add("LastNameParam", model.LastName, DbType.String);
                     parameters.Add("AgeParam", model.Age, DbType.Int32);
-                    parameters.Add("EmailParam", model.FirstName, DbType.String);
+                    parameters.Add("EmailParam", model.Email, DbType.String);
                     parameters.Add("PasswordParam", model.Password, DbType.String);
 
                     connection.Execute("InsertNewUser", parameters, commandType: CommandType.StoredProcedure);

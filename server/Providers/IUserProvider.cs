@@ -7,5 +7,7 @@ namespace server.Providers
     public interface IUserProvider
     {
         Task<IEnumerable<UserDataModel>> GetAllUsers();
+
+        Task<string> GetUserHashedPassword(string email);
     }
 }
