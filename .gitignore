@@ -1,8 +1,3 @@
 server/appsettings.json
 .vscode
-server/obj
-server/bin
-server/obj/Debug/netcoreapp2.1/server.csproj.CoreCompileInputs.cache
-server/SQL/.DS_Store
-server/.DS_Store
-server/SQL/.DS_Store
+
