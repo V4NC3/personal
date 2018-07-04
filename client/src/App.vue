@@ -1,10 +1,8 @@
 <template>
-    <div class='row'>
+    <div class='container-fluid'>
         <Navbar></Navbar>
-            <div class="container-fluid">
-                <!-- <router-view/> -->
-            </div>     
-        <Footer></Footer>
+        <router-view />     
+        <!-- <Footer></Footer> -->
     </div>
 </template>
 
