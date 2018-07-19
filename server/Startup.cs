@@ -43,8 +43,12 @@ namespace server
                     , ValidateIssuerSigningKey = true
                     , ValidIssuer = "mysite.com"
                     , IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyStoredInConfigFile"))
-                }
+                };
             });
+
+            //addMvc
+            services.AddMvc();
+
 
             //Providers
             services.AddTransient<IUserProvider, UserProvider>();
