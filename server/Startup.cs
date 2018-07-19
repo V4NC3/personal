@@ -29,7 +29,22 @@ namespace server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //JWT Authentication
+            services.AddAuthentication(JwtBearerDefault.AuthenticationScheme).AddJwtBearer(options=>
+            {
+                //token validation
+                options.TokenValidationParam = new TokenValidationParam
+                {
+                    ValidateIssuer = true
+                    , ValidateAudience = true
+                    , ValidateIssuerSigningKey = true
+                    , ValidIssuer = "mysite.com"
+                    , IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyStoredInConfigFile"))
+                }
+            });
 
             //Providers
             services.AddTransient<IUserProvider, UserProvider>();
@@ -53,7 +68,7 @@ namespace server
             {
                 app.UseHsts();
             }
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
