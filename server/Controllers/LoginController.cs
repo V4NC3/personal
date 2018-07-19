@@ -44,6 +44,7 @@ namespace server.Controllers
                 issuer: "test",
                 expires: DateTime.Now.AddDays(1)
             );
+
             return Ok("Logged In");
         }
 
@@ -55,22 +56,26 @@ namespace server.Controllers
             if(header.ToString().StartsWith("Basic"))
             {
                 var credValue = header.ToString().Substring("Basic ".Length).Trim();
-                var clientAndPassenc = Encoding.UTF8.GetString(Convert.FromBase64String(credValue));
-                var claimsdata = new[] {new Claim(ClaimTypes.Name, "USER_EMAIL")};
-
-                //using secret key
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyStoredInConfigFile"))
-                var signingCred = new signingCredentials(key, SecurityAlgorithms.HmacSha256Signature);
-                var tokenString = new JwtSecurityToken(
-                    issuer:"mysite.com"
-                    , audience: "mysite.com"
-                    , expires: DateTime.Now.AddMinutes(1)
-                    , claims: claimsdata
-                    // using secret key
-                    , signingCredentials: signingCred
-                );
-                var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-                return Ok(tokenString);
+                var clientAndPassenc = Encoding.UTF8.GetString(Convert.FromBase64String(credValue)); //admin:pass
+                var clientAndPass = clientAndPassenc.Split(":");
+                //check in DB username and pass exist
+                if(clientAndPass[0]=="Admin" && clientAndPass[1] == "pass")
+                {
+                    var claimsdata = new[] { new Claim(ClaimTypes.Name, clientAndPass[0])};
+                    //using secret key
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyStoredInConfigFile"))
+                    var signingCred = new signingCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+                    var tokenString = new JwtSecurityToken(
+                        issuer:"mysite.com"
+                        , audience: "mysite.com"
+                        , expires: DateTime.Now.AddMinutes(1)
+                        , claims: claimsdata
+                        // using secret key
+                        , signingCredentials: signingCred
+                    );
+                    var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+                    return Ok(tokenString); 
+                }
             }
             return BadRequest("Wrong Requested Token");
             //return View();  
