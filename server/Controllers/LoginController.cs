@@ -1,7 +1,10 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using server.Models.DataModels;
 using server.Providers;
 using server.Services;
@@ -24,7 +27,7 @@ namespace server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Login(UserLoginModel model) 
+        public async Task<IActionResult> Login(UserLoginModel model)
         {
             //null checking
             if (!ModelState.IsValid)
@@ -32,7 +35,7 @@ namespace server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userHashedPassword = await this.userProvider.GetUserHashedPassword(model.Email);      
+            var userHashedPassword = await this.userProvider.GetUserHashedPassword(model.Email);
             var isValidPassword = this.passwordService.VerifyPassword(userHashedPassword, model.Password);
 
             if (!isValidPassword)
@@ -49,37 +52,34 @@ namespace server.Controllers
         }
 
         [HttpPost("token")]
-        public async IActionResult Token();
+        public IActionResult GetToken()
         {
-            //string tokenString = "test";
-            var header = Request.Headers["Authorization"]
-            if(header.ToString().StartsWith("Basic"))
+            var header = Request.Headers["Authorization"];
+
+            if (header.ToString().StartsWith("Basic"))
             {
                 var credValue = header.ToString().Substring("Basic ".Length).Trim();
                 var clientAndPassenc = Encoding.UTF8.GetString(Convert.FromBase64String(credValue)); //admin:pass
                 var clientAndPass = clientAndPassenc.Split(":");
                 //check in DB username and pass exist
-                if(clientAndPass[0]=="Admin" && clientAndPass[1] == "pass")
+                if (clientAndPass[0] == "Admin" && clientAndPass[1] == "pass")
                 {
-                    var claimsdata = new[] { new Claim(ClaimTypes.Name, clientAndPass[0])};
+                    var claimsdata = new[] { new Claim(ClaimTypes.Name, clientAndPass[0]) };
                     //using secret key
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyStoredInConfigFile"))
-                    var signingCred = new signingCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SecretKeyStoredInConfigFile"));
+                    var signingCred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
                     var tokenString = new JwtSecurityToken(
-                        issuer:"mysite.com"
-                        , audience: "mysite.com"
-                        , expires: DateTime.Now.AddMinutes(1)
-                        , claims: claimsdata
-                        // using secret key
-                        , signingCredentials: signingCred
+                        issuer: "mysite.com",
+                        audience: "mysite.com",
+                        expires: DateTime.Now.AddMinutes(1),
+                        claims: claimsdata,
+                        signingCredentials: signingCred
                     );
-                    var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-                    return Ok(tokenString); 
+                    var tkn = new JwtSecurityTokenHandler().WriteToken(tokenString);
+                    return Ok(tkn);
                 }
             }
             return BadRequest("Wrong Requested Token");
-            //return View();  
-        
         }
     }
 }
