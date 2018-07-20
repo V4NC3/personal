@@ -54,14 +54,14 @@ namespace server.Controllers
         [HttpPost("token")]
         public IActionResult GetToken()
         {
-            var header = Request.Headers["Authorization"];
-
-            if (header.ToString().StartsWith("Basic"))
+            var header = Request.Headers["Authorization"]; 
+            if (header.ToString().StartsWith("Basic")) 
             {
                 var credValue = header.ToString().Substring("Basic ".Length).Trim();
                 var clientAndPassenc = Encoding.UTF8.GetString(Convert.FromBase64String(credValue)); //admin:pass
                 var clientAndPass = clientAndPassenc.Split(":");
                 //check in DB username and pass exist
+
                 if (clientAndPass[0] == "Admin" && clientAndPass[1] == "pass")
                 {
                     var claimsdata = new[] { new Claim(ClaimTypes.Name, clientAndPass[0]) };

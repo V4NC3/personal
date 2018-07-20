@@ -36,7 +36,7 @@ namespace server
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //JWT Authentication
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 //token validation
                 options.TokenValidationParameters = new TokenValidationParameters
